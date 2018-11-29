@@ -99,7 +99,7 @@ variables.tf
  __Only use an underscore (`_`) when naming Terraform resources like TYPE/NAME parameters and variables.__
  
  ```
-resource "aws_security_group" "security_group" {
+resource "google_service_account" "core_service_account" {
 ...
 ```
 
@@ -108,12 +108,12 @@ resource "aws_security_group" "security_group" {
 __Only use a hyphen (`-`) when naming the component being created.__
 
  ```
-resource "aws_security_group" "security_group" {
-  name = "${var.resource_name}-security-group"
+resource "google_compute_url_map" "default_compute_url_map" {
+   name        = "${var.market}-production-load-balancer"
 ...
 ```
 
-__A resource's NAME should be the same as the TYPE minus the provider, with a minimalistic identifier as prefix.__
+__A resource's NAME should be the same as the TYPE minus the provider, with a short prefix which clearly states the purpose of the resource.__
 
 ```
 # Resource for Core app
