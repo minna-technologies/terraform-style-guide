@@ -5,6 +5,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [Introduction](#introduction)
+
+- [Introduction](#introduction)
 - [Syntax](#syntax)
   - [Spacing](#spacing)
   - [Resource Block Alignment](#resource-block-alignment)
@@ -97,7 +99,7 @@ variables.tf
  __Only use an underscore (`_`) when naming Terraform resources like TYPE/NAME parameters and variables.__
  
  ```
-resource "aws_security_group" "security_group" {
+resource "google_service_account" "core_service_account" {
 ...
 ```
 
@@ -106,33 +108,21 @@ resource "aws_security_group" "security_group" {
 __Only use a hyphen (`-`) when naming the component being created.__
 
  ```
-resource "aws_security_group" "security_group" {
-  name = "${var.resource_name}-security-group"
+resource "google_compute_url_map" "default_compute_url_map" {
+   name        = "${var.market}-production-load-balancer"
 ...
 ```
 
-__A resource's NAME should be the same as the TYPE minus the provider.__
+__A resource's NAME should be the same as the TYPE minus the provider, with a short prefix which clearly states the purpose of the resource.__
 
 ```
-resource "aws_autoscaling_group" "autoscaling_group" {
+# Resource for Core app
+resource "google_service_account" "core_service_account" {
 ...
-```
-
-If there are multiple resources of the same TYPE defined, add a minimalistic identifier to differentiate between the two resources. A blank line should sperate resource definitions contained in the same file.
-
-```
-// Create Data S3 Bucket
-resource "aws_s3_bucket" "data_s3_bucket" {
-  bucket = "${var.environment_name}-data-${var.aws_region}"
-  acl    = "private"
-  versioning {
-    enabled = true
-  }
 }
 
-// Create Images S3 Bucket
-resource "aws_s3_bucket" "images_s3_bucket" {
-  bucket = "${var.environment_name}-images-${var.aws_region}"
-  acl    = "private"
+# Resource for InTo app
+resource "google_service_account" "into_service_account" {
+...
 }
 ```
